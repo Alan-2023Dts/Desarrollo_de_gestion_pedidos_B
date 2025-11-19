@@ -17,45 +17,72 @@ class GestorPedidos:
     - pedidos: dict[id, Pedido]
     - estaciones: dict[id, EstacionCocina]
     """
+    pedidos: dict[Union[str, int], Pedido]
+    estaciones: dict[Union[str, int], EstacionCocina]
+    
 
     def __init__(self) -> None:
         """Inicializar estructuras internas.
 
         Salida esperada: instancia con `pedidos` y `estaciones` vacías.
+        
         """
-        raise NotImplementedError()
+        self.pedidos: dict = {} #Esto sirve para inicializar el diccionario de pedidos
+        self.estaciones: dict = {} #Esto sirve para inicializar el diccionario de estaciones
+        #raise NotImplementedError() # Inicializar dicts vacíos
 
-    def crear_pedido(self, items: List[Dict], cliente_info: Optional[Dict] = None) -> Pedido:
+    def crear_pedido(self, items: List[Dict], cliente_info: Optional[Dict] = None) -> Pedido: #
         """Crear y registrar un nuevo pedido.
 
         Salida esperada: instancia `Pedido` registrada en `self.pedidos`.
+        
         """
-        raise NotImplementedError()
+        new_pedido = Pedido(id=len(self.pedidos)+1, items=items, cliente_info=cliente_info) # Crear instancia Pedido con id único
+        #La liena anterior funciona para crear un nuevo pedido con un id unico basado en la cantidad de pedidos ya existentes y para eso se usa len(self.pedidos)+1 itmens y cliente_info
+        self.pedidos[new_pedido.id] = new_pedido# Registrar en dict de pedidos, que es el diccionario que contiene todos los pedidos 
+        return new_pedido# Devolver la instancia creada
 
     def cancelar_pedido(self, pedido_id: Union[str, int]) -> bool:
         """Cancelar un pedido si es permitido.
 
         Salida esperada: True si se canceló correctamente, False si no existe o no se puede cancelar.
+        
         """
-        raise NotImplementedError()
+        pedido = self.pedidos.get(pedido_id)  # Obtener el pedido por id
+        if pedido  and pedido.estado in ['PENDIENTE', 'EN_PREPARACION']: # Verificar si existe y si se puede cancelar
+            pedido.update_estado('CANCELADO')  # Actualizar estado a CANCELADO
+            return True
+        return False  # Devolver False si no se pudo cancelar
+ 
 
     def asignar_a_estacion(self, pedido_id: Union[str, int], estacion_id: Union[str, int]) -> bool:
         """Intentar asignar un pedido a una estación concreta.
 
-        Salida esperada: True si la asignación fue exitosa, False en caso contrario.
+        Salida esperada: True si la asignQQQación fue exitosa, False en caso contrario.
         """
-        raise NotImplementedError()
+        pedido = self.pedidos.get(pedido_id)# Obtener el pedido por id
+        estacion = self.estaciones.get(estacion_id)# Obtener la estación por id
+        if pedido and estacion and estacion.puede_aceptar_pedido(pedido): # Verificar existencia y capacidad
+            estacion.asignar_pedido(pedido)  # Asignar pedido a estación
+            return True
+        return False # Devolver False si no se pudo asignar
+    
 
-    def obtener_pedido(self, pedido_id: Union[str, int]) -> Optional[Pedido]:
+    def obtener_pedido(self, pedido_id: Union[str, int]) -> Optional[Pedido]: 
         """Devolver el `Pedido` por id o None si no existe.
 
         Salida esperada: `Pedido` o `None`.
         """
-        raise NotImplementedError()
+        return self.pedidos.get(pedido_id)  # Devolver el pedido o None si no existe
+        
+        
 
     def listar_pedidos(self, estado: Optional[str] = None) -> List[Pedido]:
         """Listar pedidos, opcionalmente filtrando por `estado`.
 
         Salida esperada: lista de instancias `Pedido`.
         """
-        raise NotImplementedError()
+        if estado is None: # Devolver todos los pedidos si no hay filtro con filtro nos referimos a que si no se especifica ningun estado
+            return list(self.pedidos.values())
+        else:
+            return [pedido for pedido in self.pedidos.values() if pedido.estado == estado]
