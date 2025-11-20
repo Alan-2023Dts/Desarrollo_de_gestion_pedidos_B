@@ -36,6 +36,7 @@ class Pedido:
     - timestamp_creado: datetime de creación
     - estacion_id: id de estación asignada o None
     """
+
     
     ESTADOS_VALIDOS = ['PENDIENTE', 'EN_PREPARACION', 'LISTO', 'ENTREGADO', 'CANCELADO']
     TRANSICIONES_VALIDAS = {
@@ -47,7 +48,7 @@ class Pedido:
     }
         
     
-    def _init_(self, id: Union[str, int], items: List[Dict], cliente_info: Optional[Dict] = None) -> None:
+    def __init__(self, id: Union[str, int], items: List[Dict], cliente_info: Dict) -> None:
         # Se define un parámetro base que determinará la tolerancia de los elementos
         """Crear un Pedido.
 
@@ -64,7 +65,18 @@ class Pedido:
         if not isinstance(items, list):
             raise ValueError("Items debe ser una lista")
         self.id = id
-        self.items = items[:]  # Crear una copia de la lista para evitar modificaciones externas
+        norm_items: List[Dict] = []
+        for it in items:
+            if not isinstance(it, dict) or 'name' not in it or 'qty' not in it:
+                raise ValueError("Cada item debe ser dict con 'name' y 'qty'")
+            name = it['name']
+            qty = it['qty']
+            if not isinstance(name, str) or not isinstance(qty, int) or qty <= 0:
+                raise ValueError("Item inválido: 'name' str y 'qty' int>0")
+            prep = int(it.get('prep_time_min', 5))
+            price = round(float(it.get('price', 0.0)), 2)
+            norm_items.append({'name': name, 'qty': qty, 'prep_time_min': prep, 'price': price})
+        self.items = norm_items
         self.cliente_info = cliente_info
         self.estado = 'PENDIENTE'
         self.tiempo_estimado_min = None
