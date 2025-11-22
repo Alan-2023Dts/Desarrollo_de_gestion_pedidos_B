@@ -162,6 +162,17 @@ class Pedido:
                 return True
         return False
     
+    
+    
+    def total_price(self) -> float:
+        """Calcular total del pedido (suma qty * price por ítem)."""
+        total = 0.0
+        for it in getattr(self, 'items', []):
+            qty = int(it.get('qty', 0))
+            price = float(it.get('price', 0.0))
+            total += qty * price
+        return round(total, 2)
+
     def as_dict(self) -> Dict:
         """Devolver una representación serializable del pedido.
 
@@ -179,12 +190,14 @@ class Pedido:
 
         Este método facilita la serialización a JSON para APIs o almacenamiento.
         """
-        return {
+        data = {
             'id': self.id,
             'items': self.items,
             'estado': self.estado,
             'tiempo_estimado_min': self.tiempo_estimado_min,
-            'timestamp_creado': self.timestamp_creado.isoformat(),  # Convertir a string ISO 8601
+            'timestamp_creado': self.timestamp_creado.isoformat() if hasattr(self, 'timestamp_creado') else None,
             'estacion_id': self.estacion_id,
             'cliente_info': self.cliente_info,
+            'total_price': self.total_price()
         }
+        return data

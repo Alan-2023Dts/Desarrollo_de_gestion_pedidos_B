@@ -80,3 +80,11 @@ class EstacionCocina:
         """
         Total_de_Pedidos = len(self.cola) + len(self.en_preparacion)
         return Total_de_Pedidos
+    
+    #Fucion agregada para validacion de capacidad
+    def puede_aceptar_pedido(self, pedido: Pedido) -> bool:
+        """Verificar si la estación puede aceptar un nuevo pedido.
+
+        Salida esperada: True si hay capacidad para aceptar el pedido, False en caso contrario.
+        """
+        return (len(self.cola) + len(self.en_preparacion)) < self.capacidad
