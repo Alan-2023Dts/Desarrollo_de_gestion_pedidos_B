@@ -26,22 +26,24 @@ def main() -> None:
     # 1) Crear gestor y recursos
     # gestor = GestorPedidos()
     # gestor.estaciones['A'] = EstacionCocina('A', capacidad=2)
+    gestor = GestorPedidos()
+    gestor.estaciones['A'] = EstacionCocina('A', capacidad=2)
 
     # 2) Crear un pedido de ejemplo
     # pedido = gestor.crear_pedido([{'name':'Pizza','qty':1,'prep_time_min':12}])
-
+    pedido = gestor.crear_pedido([{'name':'Pizza','qty':1 ,'prep_time_min':12}])
     # 3) Asignar a estación
     # gestor.asignar_a_estacion(pedido.id, 'A')
-
+    gestor.asignar_a_estacion(pedido.id, 'A')
     # 4) Calcular estimado
     # calcular_tiempo_estimado(pedido, gestor.estaciones['A'])
-
+    #calcular_tiempo_estimado(pedido, gestor.estaciones['A'])
     # 5) Notificar
     # notificador = Notificador(modo='console')
     # notificador.enviar(pedido, 'CREADO')
+    notificador = Notificador(modo='console')
+    notificador.enviar(pedido, 'CREADO')
 
-    # NOTA: Este archivo actualmente no ejecuta la lógica; es un esqueleto.
-    raise NotImplementedError("Implementar el flujo principal en `src.main.main()` según el README")
 
 
 if __name__ == '__main__':
