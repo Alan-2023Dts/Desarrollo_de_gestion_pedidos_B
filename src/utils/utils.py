@@ -33,6 +33,10 @@ def validar_items(items: list) -> bool:
     if not isinstance(items, list):
         return False
     for it in items:
+        if not isinstance(it, dict):
+            return False
+        if 'name' not in it or 'qty' not in it:
+            return False
         try:
             if int(it.get('qty', 0)) <= 0:
                 return False

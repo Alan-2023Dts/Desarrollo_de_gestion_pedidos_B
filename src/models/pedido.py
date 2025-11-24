@@ -38,9 +38,10 @@ class Pedido:
     """
 
     
-    ESTADOS_VALIDOS = ['PENDIENTE', 'EN_PREPARACION', 'LISTO', 'ENTREGADO', 'CANCELADO']
+    ESTADOS_VALIDOS = ['PENDIENTE', 'EN_COLA', 'EN_PREPARACION', 'LISTO', 'ENTREGADO', 'CANCELADO']
     TRANSICIONES_VALIDAS = {
-        'PENDIENTE': ['EN_PREPARACION', 'CANCELADO'],
+        'PENDIENTE': ['EN_COLA', 'EN_PREPARACION', 'CANCELADO'],
+        'EN_COLA': ['EN_PREPARACION', 'CANCELADO'],
         'EN_PREPARACION': ['LISTO', 'CANCELADO'],
         'LISTO': ['ENTREGADO'],
         'ENTREGADO': [],
@@ -48,7 +49,7 @@ class Pedido:
     }
         
     
-    def __init__(self, id: Union[str, int], items: List[Dict], cliente_info: Dict) -> None:
+    def __init__(self, id: Union[str, int], items: List[Dict], cliente_info: Optional[Dict] = None) -> None:
         # Se define un parámetro base que determinará la tolerancia de los elementos
         """Crear un Pedido.
 
@@ -77,7 +78,7 @@ class Pedido:
             price = round(float(it.get('price', 0.0)), 2)
             norm_items.append({'name': name, 'qty': qty, 'prep_time_min': prep, 'price': price})
         self.items = norm_items
-        self.cliente_info = cliente_info
+        self.cliente_info = dict(cliente_info) if cliente_info else None
         self.estado = 'PENDIENTE'
         self.tiempo_estimado_min = None
         self.timestamp_creado = datetime.now()

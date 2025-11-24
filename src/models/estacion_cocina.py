@@ -40,9 +40,15 @@ class EstacionCocina:
 
         Salida esperada: bool indicando si la asignación fue exitosa.
         """
-        pedido.estado = 'EN_COLA' # Actualizar estado del pedido a EN_COLA
-        if len(self.cola) + len(self.en_preparacion) < self.capacidad: # Verificar si hay capacidad disponible
-            self.cola.append(pedido)# Agregar pedido a la cola append sirve para agregar un elemento al final de una lista
+        # Intentar usar la API de Pedido para cambiar el estado a EN_COLA (si está permitido)
+        try:
+            pedido.update_estado('EN_COLA')
+        except Exception:
+            # si no es válida la transición, no interrumpimos; seguimos intentando encolar
+            pass
+
+        if len(self.cola) + len(self.en_preparacion) < self.capacidad:
+            self.cola.append(pedido)
             return True
         return False
 
@@ -54,8 +60,11 @@ class EstacionCocina:
         """
         pedidos_iniciados = [] # Lista para almacenar pedidos que inician preparación
         while self.cola and len(self.en_preparacion) < self.capacidad:
-            pedido = self.cola.pop(0)  # Sacar el primer pedido de la cola pop sirve para eliminar y devolver un elemento de una lista, en este caso el primer elemento
-            pedido.estado = 'EN_PREPARACION'  # Actualizar estado a EN_PREPARACION
+            pedido = self.cola.pop(0)  # Sacar el primer pedido de la cola
+            try:
+                pedido.update_estado('EN_PREPARACION')
+            except Exception:
+                pedido.estado = 'EN_PREPARACION'
             self.en_preparacion.append(pedido)  # Agregar a en_preparacion
             pedidos_iniciados.append(pedido)  # Agregar a la lista de iniciados
         return pedidos_iniciados
@@ -67,7 +76,10 @@ class EstacionCocina:
         """
         for pedido in self.en_preparacion:
             if pedido.id == pedido_id:
-                pedido.estado = 'LISTO'  # Actualizar estado a LISTO
+                try:
+                    pedido.update_estado('LISTO')
+                except Exception:
+                    pedido.estado = 'LISTO'
                 self.en_preparacion.remove(pedido)  # Eliminar de en_preparacion
                 return True
         return False

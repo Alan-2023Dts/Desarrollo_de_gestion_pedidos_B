@@ -27,25 +27,29 @@ class Notificador:
         Salida esperada: True si la notificación se envió (o se simuló) correctamente,
         False en caso de fallo.
         """
-        print(f"[Notificador-{self.modo}] Evento: {evento} para Pedido ID: {pedido.id}")
-        
-        items = getattr(pedido, 'items', []) or []
-        if items:
-            print("---- TICKET ----")
-            running = 0.0
-            for it in items:
-                name = it.get('name', 'N/A')
-                qty = int(it.get('qty', 1))
-                price = float(it.get('price', 0.0))
-                subtotal = qty * price
-                running += subtotal
-                print(f"  {name} x{qty}  @ {price:.2f}  = {subtotal:.2f}")
-            total = pedido.total_dprice() if hasattr(pedido, 'total_price') else running
-            print("-----------------")
-            print(f"TOTAL: {total:.2f}")
-            if getattr(pedido, 'cliente_info', None):
-                print(f"Cliente: {pedido.cliente_info}")
-            print("-----------------")
-        else:
-            print("(No hay items para ticket)")
-        return True
+        try:
+            print(f"[Notificador-{self.modo}] Evento: {evento} para Pedido ID: {pedido.id}")
+
+            items = getattr(pedido, 'items', []) or []
+            if items:
+                print("---- TICKET ----")
+                running = 0.0
+                for it in items:
+                    name = it.get('name', 'N/A')
+                    qty = int(it.get('qty', 1))
+                    price = float(it.get('price', 0.0))
+                    subtotal = qty * price
+                    running += subtotal
+                    print(f"  {name} x{qty}  @ {price:.2f}  = {subtotal:.2f}")
+                total = pedido.total_price() if hasattr(pedido, 'total_price') else running
+                print("-----------------")
+                print(f"TOTAL: {total:.2f}")
+                if getattr(pedido, 'cliente_info', None):
+                    print(f"Cliente: {pedido.cliente_info}")
+                print("-----------------")
+            else:
+                print("(No hay items para ticket)")
+            return True
+        except Exception as e:
+            print(f"[Notificador] Error al enviar notificación: {e}")
+            return False

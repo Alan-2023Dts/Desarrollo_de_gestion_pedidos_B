@@ -28,16 +28,17 @@ def main() -> None:
     # gestor.estaciones['A'] = EstacionCocina('A', capacidad=2)
     gestor = GestorPedidos()
     gestor.estaciones['A'] = EstacionCocina('A', capacidad=2)
-
     # 2) Crear un pedido de ejemplo
     # pedido = gestor.crear_pedido([{'name':'Pizza','qty':1,'prep_time_min':12}])
-    pedido = gestor.crear_pedido([{'name':'Pizza','qty':1 ,'prep_time_min':12}])
+    pedido = gestor.crear_pedido([{'name':'Pizza','qty':1 ,'prep_time_min':12, 'price': 8.50}])
     # 3) Asignar a estación
     # gestor.asignar_a_estacion(pedido.id, 'A')
     gestor.asignar_a_estacion(pedido.id, 'A')
-    # 4) Calcular estimado
-    # calcular_tiempo_estimado(pedido, gestor.estaciones['A'])
-    #calcular_tiempo_estimado(pedido, gestor.estaciones['A'])
+    # 4) Calcular estimado (robusto: ignorar errores del temporizador)
+    try:
+        calcular_tiempo_estimado(pedido, gestor.estaciones['A'])
+    except Exception:
+        pedido.tiempo_estimado_min = getattr(pedido, 'tiempo_estimado_min', None)
     # 5) Notificar
     # notificador = Notificador(modo='console')
     # notificador.enviar(pedido, 'CREADO')

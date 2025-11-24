@@ -37,10 +37,11 @@ class GestorPedidos:
         Salida esperada: instancia `Pedido` registrada en `self.pedidos`.
         
         """
-        new_pedido = Pedido(id=len(self.pedidos)+1, items=items, cliente_info=cliente_info) # Crear instancia Pedido con id único
-        #La liena anterior funciona para crear un nuevo pedido con un id unico basado en la cantidad de pedidos ya existentes y para eso se usa len(self.pedidos)+1 itmens y cliente_info
-        self.pedidos[new_pedido.id] = new_pedido# Registrar en dict de pedidos, que es el diccionario que contiene todos los pedidos 
-        return new_pedido# Devolver la instancia creada
+        # Generación de ID legible: PED-0001, PED-0002, ...
+        new_id = f"PED-{len(self.pedidos) + 1:04d}"
+        new_pedido = Pedido(id=new_id, items=items, cliente_info=cliente_info)
+        self.pedidos[new_id] = new_pedido
+        return new_pedido
 
     def cancelar_pedido(self, pedido_id: Union[str, int]) -> bool:
         """Cancelar un pedido si es permitido.
