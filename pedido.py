@@ -1,12 +1,11 @@
-"""Raíz removida: importar desde `src.models.pedido`.
+"""Compatibilidad: re-exportar `Pedido` desde `src.models.pedido`.
 
-Este archivo existía como wrapper de compatibilidad. Para simplificar la
-estructura y evitar ambigüedades, las importaciones desde la raíz han sido
-eliminadas. Importa la clase `Pedido` desde el paquete `src`:
-
-	from src.models.pedido import Pedido
-
-Si necesitas que mantenga compatibilidad temporal, dímelo y lo restauro.
+Este wrapper permite seguir haciendo `from pedido import Pedido` desde
+scripts o entornos que aún importen desde la raíz del repositorio.
+Preferimos importaciones explícitas desde `src.*`, pero este wrapper
+facilita compatibilidad hacia atrás.
 """
 
-raise RuntimeError("Import desde la raíz eliminado: usa 'from src.models.pedido import Pedido'.")
+from src.models.pedido import Pedido
+
+__all__ = ["Pedido"]

@@ -1,15 +1,12 @@
-"""Wrapper de compatibilidad: exporta `EstacionCocina` desde `src.models`.
+"""Compatibilidad: re-exportar `EstacionCocina` desde `src.models.estacion_cocina`.
 
-Re-export para compatibilidad con imports existentes durante la reorganización.
+Permite seguir importando `EstacionCocina` desde la raíz:
+
+	from estacion_cocina import EstacionCocina
+
+Se recomienda usar `from src.models.estacion_cocina import EstacionCocina`.
 """
 
-"""Raíz removida: importar desde `src.models.estacion_cocina`.
+from src.models.estacion_cocina import EstacionCocina
 
-Importar desde la raíz ha sido descontinuado. Usa:
-
-	from src.models.estacion_cocina import EstacionCocina
-
-Contacta si necesitas compatibilidad temporal.
-"""
-
-raise RuntimeError("Import desde la raíz eliminado: usa 'from src.models.estacion_cocina import EstacionCocina'.")
+__all__ = ["EstacionCocina"]

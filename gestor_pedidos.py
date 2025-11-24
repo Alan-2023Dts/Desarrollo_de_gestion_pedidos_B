@@ -1,15 +1,12 @@
-"""Wrapper de compatibilidad: exporta `GestorPedidos` desde `src.services`.
+"""Compatibilidad: re-exportar `GestorPedidos` desde `src.services.gestor_pedidos`.
 
-Re-export para compatibilidad con imports existentes durante la reorganización.
+Permite seguir importando `GestorPedidos` desde la raíz:
+
+	from gestor_pedidos import GestorPedidos
+
+Se recomienda usar `from src.services.gestor_pedidos import GestorPedidos`.
 """
 
-"""Raíz removida: importar desde `src.services.gestor_pedidos`.
+from src.services.gestor_pedidos import GestorPedidos
 
-Importar desde la raíz ha sido descontinuado. Usa:
-
-	from src.services.gestor_pedidos import GestorPedidos
-
-Contacta si necesitas compatibilidad temporal.
-"""
-
-raise RuntimeError("Import desde la raíz eliminado: usa 'from src.services.gestor_pedidos import GestorPedidos'.")
+__all__ = ["GestorPedidos"]

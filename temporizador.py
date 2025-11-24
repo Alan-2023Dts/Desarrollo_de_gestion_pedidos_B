@@ -1,17 +1,12 @@
-"""Wrapper de compatibilidad: re-exporta funciones del temporizador desde `src.services`.
+"""Compatibilidad: re-exportar funciones del temporizador desde `src.services.temporizador`.
 
-Funciones:
-- `calcular_tiempo_estimado`
-- `formato_tiempo`
+Permite:
+
+	from temporizador import calcular_tiempo_estimado, formato_tiempo
+
+Se recomienda usar `from src.services.temporizador import ...`.
 """
 
-"""Raíz removida: importar funciones desde `src.services.temporizador`.
+from src.services.temporizador import calcular_tiempo_estimado, formato_tiempo
 
-Importar desde la raíz ha sido descontinuado. Usa:
-
-	from src.services.temporizador import calcular_tiempo_estimado, formato_tiempo
-
-Contacta si necesitas compatibilidad temporal.
-"""
-
-raise RuntimeError("Import desde la raíz eliminado: usa 'from src.services.temporizador import calcular_tiempo_estimado, formato_tiempo'.")
+__all__ = ["calcular_tiempo_estimado", "formato_tiempo"]

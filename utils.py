@@ -1,10 +1,12 @@
-"""Raíz removida: importar utilidades desde `src.utils.utils`.
+"""Compatibilidad: re-exportar utilidades desde `src.utils.utils`.
 
-Importar desde la raíz ha sido descontinuado. Usa:
+Permite hacer:
 
-	from src.utils.utils import generar_id, ahora_iso, validar_items
+	from utils import generar_id, ahora_iso, validar_items
 
-Contacta si necesitas compatibilidad temporal.
+Se recomienda usar `from src.utils.utils import ...`.
 """
 
-raise RuntimeError("Import desde la raíz eliminado: usa 'from src.utils.utils import generar_id, ahora_iso, validar_items'.")
+from src.utils.utils import generar_id, ahora_iso, validar_items
+
+__all__ = ["generar_id", "ahora_iso", "validar_items"]

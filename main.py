@@ -1,18 +1,12 @@
-"""Wrapper de compatibilidad: re-exporta `main` desde `src.main`.
+"""Compatibilidad: wrapper para ejecutar el entrypoint `src.main.main`.
 
-Al ejecutar `python main.py` en la raíz, esto intentará invocar
-`src.main.main()` (actualmente placeholder). Mantener este wrapper evita cambios
-inmediatos en los scripts de ejecución existentes.
+Este archivo permite seguir ejecutando `python main.py` en la raíz durante
+la transición. Recomendamos `python -m src.main`, pero este wrapper
+invoca la implementación del paquete `src`.
 """
 
-"""Raíz removida: ejecutar el entrypoint desde el paquete `src`.
+from src.main import main as _main
 
-En lugar de ejecutar `python main.py` en la raíz, usa el módulo de paquete:
 
-    python -m src.main
-
-Esto evita problemas de imports relativos y garantiza que Python trate `src`
-como paquete.
-"""
-
-raise RuntimeError("Ejecución desde la raíz descontinuada: usa 'python -m src.main'.")
+if __name__ == '__main__':
+    _main()
