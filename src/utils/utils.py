@@ -12,7 +12,9 @@ def generar_id(prefix: str = '') -> str:
 
     Salida esperada: cadena única (ejemplo: 'PED-20251118-0001').
     """
-    raise NotImplementedError()
+    # Generación simple basada en timestamp UTC
+    ts = datetime.utcnow().strftime('%Y%m%d%H%M%S')
+    return f"{prefix}{ts}"
 
 
 def ahora_iso() -> str:
@@ -20,7 +22,7 @@ def ahora_iso() -> str:
 
     Salida esperada: string ISO, ejemplo: '2025-11-18T12:34:56'.
     """
-    raise NotImplementedError()
+    return datetime.utcnow().isoformat()
 
 
 def validar_items(items: list) -> bool:
@@ -28,4 +30,12 @@ def validar_items(items: list) -> bool:
 
     Salida esperada: True si la estructura es válida, False en caso contrario.
     """
-    raise NotImplementedError()
+    if not isinstance(items, list):
+        return False
+    for it in items:
+        try:
+            if int(it.get('qty', 0)) <= 0:
+                return False
+        except Exception:
+            return False
+    return True
