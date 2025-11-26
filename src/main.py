@@ -14,6 +14,7 @@ from .services.temporizador import calcular_tiempo_estimado
 import sys
 import time
 import os
+import re
 import json
 
 PRODUCTS = [
@@ -88,9 +89,9 @@ def elegir_productos() -> list[dict]:
     items: list[dict] = []
     while True:
         mostrar_catalogo()
-        entrada = input('\nIntroduce el número del producto para agregar (ENTER para terminar): ').strip()
+        entrada = input('\nIntroduce el número del producto para agregar (ENTER para cancelar): ').strip()
         if entrada == '':
-            break
+            return
         try:
             idx = int(entrada)
             if idx < 1 or idx > len(PRODUCTS):
@@ -101,15 +102,27 @@ def elegir_productos() -> list[dict]:
             continue
 
         producto = PRODUCTS[idx - 1]
-        try:
-            qty = int(input('Cantidad (por defecto 1): ').strip() or '1')
-            if qty < 1:
-                print('Cantidad mínima 1, usando 1')
-                qty = 1
-        except Exception:
-            print('Cantidad inválida, usando 1')
-            time.sleep(1)
-            qty = 1
+        while True:
+            try:
+                qty = int(input('Cantidad seleccionada:\t').strip() or '1')
+                if qty == ' ':
+                    print ('Valor blanco, intenta de nuevo.\n')
+                    continue
+                if qty < 6:
+                    print (f'Agregando {qty} x {producto["name"]} al pedido...\n')
+                    time.sleep(1)
+                    break
+                elif qty == 0:
+                    print ('Recuerda que no puedes agregar 0 productos, intenta de nuevo.\n')
+                    continue
+                elif qty >= 6:
+                    print('Cantidad máxima por producto es 5. Se demorará la preparación del pedido.\n')
+                    print (f'Agregando {qty} x {producto["name"]} al pedido...\n')
+                    break
+                
+            except ValueError:
+                print('Entrada inválida, introduce un número.\n')
+                continue
 
         # Agregar al pedido usando la info del catálogo
         items.append({
@@ -152,13 +165,106 @@ def main() -> None:
 
     os.system("cls")
     print('=== Nuevo pedido interactivo ===\n')
-    cliente_nombre = input('Nombre del cliente (opcional):\n ->\t').strip() or None
-    cliente_telefono = input('Teléfono del cliente (opcional):\n ->\t').strip() or None
-    cliente = {'nombre': cliente_nombre, 'telefono': cliente_telefono} if (cliente_nombre or cliente_telefono) else None
+    time.sleep(1)
+    os.system("cls")
+    
+    while True:
+        cliente_nombre = input('Nombre del cliente:\n ->\t').strip()
+        if cliente_nombre == '':
+            print ('Debe ingresar un nombre.\n')
+            time.sleep(.5)
+            os.system("cls")
+            continue
+        elif cliente_nombre .isdigit() or not all(c.isalpha() or c.isspace() for c in cliente_nombre):
+            print ('No se aceptan números ni caracteres especiales. Intenta de nuevo.\n')
+            time.sleep(.5)
+            os.system("cls")
+            continue
+        elif cliente_nombre != re.sub(r'(.)\1{2,}', r'\1\1', cliente_nombre):
+            print ('No se permiten más de dos letras consecutivas iguales. Intenta de nuevo.\n')
+            time.sleep(.5)
+            os.system("cls")
+            continue
+        elif cliente_nombre.islower() or cliente_nombre.isupper():
+            print ('El nombre debe tener mayúsculas y minúsculas. Intenta de nuevo.\n')
+            time.sleep(.5)
+            os.system("cls")
+            continue
+        elif cliente_nombre.istitle() is False:
+            print ('El nombre debe iniciar con mayúscula. Intenta de nuevo.\n')
+            time.sleep(.5)
+            os.system("cls")
+            continue
+        elif len(cliente_nombre) < 3:
+            print ('El nombre es muy corto. Intenta de nuevo.\n')
+            time.sleep(.5)
+            os.system("cls")
+            continue
+        elif len(cliente_nombre) > 30:
+            print ('El nombre es muy largo. Intenta de nuevo.\n')
+            time.sleep(.5)
+            os.system("cls")
+            continue    
+        else:
+            print ('Nombre aceptado.\n')
+            break
 
+    while True:
+        cliente_telefono = input('Teléfono del cliente (opcional):\n ->\t').strip()
+        if cliente_telefono == '':
+            print ('Debe ingresar un número de teléfono\n')
+            time.sleep(.5)
+            os.system("cls")
+            continue
+        elif not cliente_telefono.isdigit():
+            print ('Solo se aceptan números. Intenta de nuevo.\n')
+            time.sleep(.5)
+            os.system("cls")
+            continue
+        elif cliente_telefono.startswith('0'):
+            print ('El número no debe iniciar con cero. Intenta de nuevo.\n')
+            time.sleep(.5)
+            os.system("cls")
+            continue
+        elif len(cliente_telefono) < 7:
+            print ('El número es muy corto. Intenta de nuevo.\n')
+            time.sleep(.5)
+            os.system("cls")
+            continue
+        elif len(cliente_telefono) > 14:
+            print ('El número es muy largo. Intenta de nuevo.\n')
+            time.sleep(.5)
+            os.system("cls")
+            continue
+        else:
+            print ('Número de teléfono aceptado.\n')
+            break
+    
+    while True:
+        op = input ('¿Deseas continuar con el pedido? (Si/No):\n     Respuesta:\t').strip().lower()
+        match op:
+            case 'no' | 'n' | 'not' | 'nop':
+                print ("\nSaliendo de la gestión de pedidos...")
+                time.sleep(.5)
+                os.system("cls")
+                return
+            case 'si' | 's' | 'yes' | 'y':
+                print ("\nContinuando con el pedido...")
+                break
+            case _:
+                print ("\nOpción inválida. Selecciona otro valor.")
+                continue
+    time.sleep(.5)
+    cliente = {'nombre': cliente_nombre, 'telefono': cliente_telefono}
+    time.sleep(1)
+    print ('\n\tCliente registrado correctamente.\n')
+    time.sleep(1)
+    os.system("cls")
+    
     items = elegir_productos()
     if not items:
-        print('No se seleccionaron productos. Saliendo.')
+        print('No se seleccionaron productos...Saliendo.')
+        time.sleep(.5)
         return
 
     pedido = gestor.crear_pedido(items, cliente_info=cliente)

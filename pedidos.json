@@ -15,5 +15,181 @@
     "estacion_id": null,
     "cliente_info": null,
     "total_price": 130.0
+  },
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Hamburguesa con Queso",
+        "qty": 34,
+        "prep_time_min": 8,
+        "price": 65.0
+      },
+      {
+        "name": "Cheesecake",
+        "qty": 1,
+        "prep_time_min": 2,
+        "price": 85.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-25T21:30:22.880690",
+    "estacion_id": null,
+    "cliente_info": {
+      "nombre": "Milton Emmanuel López Pech",
+      "telefono": "9991233225"
+    },
+    "total_price": 2295.0
+  },
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Pizza Margarita",
+        "qty": 1,
+        "prep_time_min": 12,
+        "price": 50.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-25T22:38:09.633561",
+    "estacion_id": null,
+    "cliente_info": {
+      "nombre": "Molwd",
+      "telefono": "3245678976543"
+    },
+    "total_price": 50.0
+  },
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Pizza de Champiñones",
+        "qty": 4,
+        "prep_time_min": 12,
+        "price": 62.0
+      },
+      {
+        "name": "Hamburguesa con Queso",
+        "qty": 1,
+        "prep_time_min": 8,
+        "price": 65.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-25T22:53:51.718944",
+    "estacion_id": null,
+    "cliente_info": {
+      "nombre": "Milton",
+      "telefono": "9991140979"
+    },
+    "total_price": 313.0
+  },
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Pizza de Pepperoni",
+        "qty": 1,
+        "prep_time_min": 12,
+        "price": 65.0
+      },
+      {
+        "name": "Hamburguesa con Bacon",
+        "qty": 1,
+        "prep_time_min": 9,
+        "price": 85.0
+      },
+      {
+        "name": "Pizza de Champiñones",
+        "qty": 3,
+        "prep_time_min": 12,
+        "price": 62.0
+      },
+      {
+        "name": "Ensalada Mixta",
+        "qty": 5,
+        "prep_time_min": 4,
+        "price": 60.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-25T23:23:36.595751",
+    "estacion_id": null,
+    "cliente_info": {
+      "nombre": "Milton",
+      "telefono": "98765432"
+    },
+    "total_price": 636.0
+  },
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Cheesecake",
+        "qty": 8,
+        "prep_time_min": 2,
+        "price": 85.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-25T23:33:36.814682",
+    "estacion_id": null,
+    "cliente_info": {
+      "nombre": "Milton",
+      "telefono": "9876543"
+    },
+    "total_price": 680.0
+  },
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Pizza Hawaiana",
+        "qty": 6,
+        "prep_time_min": 12,
+        "price": 70.0
+      },
+      {
+        "name": "Pizza Vegetariana",
+        "qty": 3456,
+        "prep_time_min": 12,
+        "price": 58.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-25T23:37:31.566937",
+    "estacion_id": null,
+    "cliente_info": {
+      "nombre": "Milton",
+      "telefono": "9876543"
+    },
+    "total_price": 200868.0
+  },
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Pizza Vegetariana",
+        "qty": 65,
+        "prep_time_min": 12,
+        "price": 58.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-25T23:38:25.385854",
+    "estacion_id": null,
+    "cliente_info": {
+      "nombre": "Srghjk",
+      "telefono": "98765432"
+    },
+    "total_price": 3770.0
   }
 ]

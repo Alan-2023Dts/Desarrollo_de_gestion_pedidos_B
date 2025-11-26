@@ -22,7 +22,7 @@ while True:
             os.system("cls")
 
             while True:
-                comienzo = input ('¿Deseas iniciar nueva gestión de pedidos? (s/n):\n     Respuesta:\t').strip().lower()
+                comienzo = input ('¿Deseas iniciar nueva gestión de pedidos? (Si/No):\n     Respuesta:\t').strip().lower()
                 match comienzo:
                     case 'si' | 's' | 'yes' | 'y':
                         print ("\nIniciando gestión de pedidos...")
