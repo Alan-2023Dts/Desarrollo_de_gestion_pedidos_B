@@ -1,0 +1,19 @@
+[
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Pizza de Pepperoni",
+        "qty": 2,
+        "prep_time_min": 12,
+        "price": 65.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-25T19:00:29.687285",
+    "estacion_id": null,
+    "cliente_info": null,
+    "total_price": 130.0
+  }
+]

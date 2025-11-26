@@ -31,7 +31,7 @@ class GestorPedidos:
         self.estaciones: dict = {} #Esto sirve para inicializar el diccionario de estaciones
         #raise NotImplementedError() # Inicializar dicts vacíos
 
-    def crear_pedido(self, items: List[Dict], cliente_info: Optional[Dict] = None) -> Pedido: #
+    def crear_pedido(self, items: List[Dict], cliente_info: Optional[Dict] = None) -> Pedido: 
         """Crear y registrar un nuevo pedido.
 
         Salida esperada: instancia `Pedido` registrada en `self.pedidos`.
@@ -59,7 +59,7 @@ class GestorPedidos:
     def asignar_a_estacion(self, pedido_id: Union[str, int], estacion_id: Union[str, int]) -> bool:
         """Intentar asignar un pedido a una estación concreta.
 
-        Salida esperada: True si la asignQQQación fue exitosa, False en caso contrario.
+        Salida esperada: True si la asignación fue exitosa, False en caso contrario.
         """
         pedido = self.pedidos.get(pedido_id)# Obtener el pedido por id
         estacion = self.estaciones.get(estacion_id)# Obtener la estación por id
