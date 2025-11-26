@@ -153,7 +153,7 @@ def elegir_productos() -> list[dict]:
             'price': producto['price'],
         })
 
-        seguir = input('¿Deseas agregar otro producto? (s/N) \n\to Enter para continuar:\n').strip().lower()
+        seguir = input('¿Deseas agregar otro producto? (s/N) \n\to Enter para continuar:\t').strip().lower()
         match seguir:
             case 's' | 'si' | 'y' | 'yes':
                 continue
@@ -236,7 +236,7 @@ def main() -> None:
             break
 
     while True:
-        cliente_telefono = input('Teléfono del cliente (opcional):\n ->\t').strip()
+        cliente_telefono = input('Teléfono del cliente:\n ->\t').strip()
         if cliente_telefono == '':
             print ('Debe ingresar un número de teléfono\n')
             time.sleep(.5)

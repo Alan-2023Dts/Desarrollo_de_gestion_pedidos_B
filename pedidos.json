@@ -297,5 +297,123 @@
       "telefono": "98765432"
     },
     "total_price": 130.0
+  },
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Ensalada Mixta",
+        "qty": 3,
+        "prep_time_min": 4,
+        "price": 60.0
+      },
+      {
+        "name": "Pizza de Pepperoni",
+        "qty": 3,
+        "prep_time_min": 12,
+        "price": 65.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-26T06:19:30.367493",
+    "estacion_id": null,
+    "cliente_info": {
+      "nombre": "Nick Ja",
+      "telefono": "38765432"
+    },
+    "total_price": 375.0
+  },
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Tiramisu",
+        "qty": 1,
+        "prep_time_min": 2,
+        "price": 60.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-26T06:56:26.509221",
+    "estacion_id": null,
+    "cliente_info": {
+      "nombre": "Andrey",
+      "telefono": "9991728098"
+    },
+    "total_price": 60.0
+  },
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Papas Fritas",
+        "qty": 3,
+        "prep_time_min": 5,
+        "price": 35.0
+      },
+      {
+        "name": "Alitas de Pollo",
+        "qty": 80,
+        "prep_time_min": 8,
+        "price": 75.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-26T07:08:33.091996",
+    "estacion_id": null,
+    "cliente_info": {
+      "nombre": "Pedro",
+      "telefono": "1863186165"
+    },
+    "total_price": 6105.0
+  },
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Pizza BBQ",
+        "qty": 1,
+        "prep_time_min": 13,
+        "price": 75.0
+      },
+      {
+        "name": "Pizza Hawaiana",
+        "qty": 1,
+        "prep_time_min": 12,
+        "price": 70.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-26T07:18:28.442953",
+    "estacion_id": null,
+    "cliente_info": {
+      "nombre": "Angel",
+      "telefono": "99999999999999"
+    },
+    "total_price": 145.0
+  },
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Pizza de Pepperoni",
+        "qty": 9,
+        "prep_time_min": 12,
+        "price": 65.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-26T07:31:49.953079",
+    "estacion_id": null,
+    "cliente_info": {
+      "nombre": "Angel",
+      "telefono": "9999999999"
+    },
+    "total_price": 585.0
   }
 ]
