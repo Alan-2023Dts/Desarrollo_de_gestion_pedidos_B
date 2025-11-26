@@ -91,7 +91,18 @@ def elegir_productos() -> list[dict]:
         mostrar_catalogo()
         entrada = input('\nIntroduce el número del producto para agregar (ENTER para cancelar): ').strip()
         if entrada == '':
-            return
+            op = input('¿Deseas cancelar la selección de productos? (s/N):\t').strip().lower()
+            match op:
+                case 's' | 'si' | 'y' | 'yes':
+                    print ('Cancelando selección de productos...\n')
+                    time.sleep(1)
+                    return
+                case 'n' | 'no' | 'not' | 'nop' | '':
+                    print ('Continuando con la selección de productos...\n')
+                    continue
+                case _:
+                    print ('Opción inválida, intenta de nuevo.\n')
+                    continue
         try:
             idx = int(entrada)
             if idx < 1 or idx > len(PRODUCTS):
@@ -104,21 +115,31 @@ def elegir_productos() -> list[dict]:
         producto = PRODUCTS[idx - 1]
         while True:
             try:
-                qty = int(input('Cantidad seleccionada:\t').strip() or '1')
+                qty = int(input('Cantidad seleccionada:\t').strip())
                 if qty == ' ':
                     print ('Valor blanco, intenta de nuevo.\n')
                     continue
-                if qty < 6:
+                
+                if qty == 0:
+                    print ('Recuerda que no puedes agregar 0 productos, intenta de nuevo.\n')
+                    continue
+                elif qty < 6:
                     print (f'Agregando {qty} x {producto["name"]} al pedido...\n')
                     time.sleep(1)
                     break
-                elif qty == 0:
-                    print ('Recuerda que no puedes agregar 0 productos, intenta de nuevo.\n')
-                    continue
                 elif qty >= 6:
                     print('Cantidad máxima por producto es 5. Se demorará la preparación del pedido.\n')
-                    print (f'Agregando {qty} x {producto["name"]} al pedido...\n')
-                    break
+                    op = input('¿Deseas continuar con esta cantidad? (s/N):\t').strip().lower()
+                    match op:
+                        case 's' | 'si' | 'y' | 'yes':
+                            print (f'Agregando {qty} x {producto["name"]} al pedido...\n')
+                            break
+                        case 'n' | 'no' | 'not' | 'nop' | '':
+                            print ('Cantidad no agregada, intenta de nuevo.\n')
+                            continue
+                        case _:
+                            print ('Opción inválida, intenta de nuevo.\n')
+                            continue
                 
             except ValueError:
                 print('Entrada inválida, introduce un número.\n')
@@ -132,9 +153,15 @@ def elegir_productos() -> list[dict]:
             'price': producto['price'],
         })
 
-        seguir = input('¿Deseas agregar otro producto? (s/N):\n').strip().lower()
-        if seguir not in ('s', 'si', 'y', 'yes'):
-            break
+        seguir = input('¿Deseas agregar otro producto? (s/N) \n\to Enter para continuar:\n').strip().lower()
+        match seguir:
+            case 's' | 'si' | 'y' | 'yes':
+                continue
+            case 'n' | 'no' | 'not' | 'nop' | '':
+                break
+            case _:
+               print ('Opción inválida, selecciona otro valor.\n')
+               continue
 
     return items
 
@@ -166,7 +193,6 @@ def main() -> None:
     os.system("cls")
     print('=== Nuevo pedido interactivo ===\n')
     time.sleep(1)
-    os.system("cls")
     
     while True:
         cliente_nombre = input('Nombre del cliente:\n ->\t').strip()

@@ -191,5 +191,111 @@
       "telefono": "98765432"
     },
     "total_price": 3770.0
+  },
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Pizza de Champiñones",
+        "qty": 2,
+        "prep_time_min": 12,
+        "price": 62.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-25T23:51:13.770564",
+    "estacion_id": null,
+    "cliente_info": {
+      "nombre": "Milton",
+      "telefono": "98765432"
+    },
+    "total_price": 124.0
+  },
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Pizza Margarita",
+        "qty": 4,
+        "prep_time_min": 12,
+        "price": 50.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-25T23:57:16.294373",
+    "estacion_id": null,
+    "cliente_info": {
+      "nombre": "Milton",
+      "telefono": "98765432"
+    },
+    "total_price": 200.0
+  },
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Pizza Margarita",
+        "qty": 3,
+        "prep_time_min": 12,
+        "price": 50.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-26T00:03:34.074553",
+    "estacion_id": null,
+    "cliente_info": {
+      "nombre": "Milton",
+      "telefono": "98765432"
+    },
+    "total_price": 150.0
+  },
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Pizza Margarita",
+        "qty": 1,
+        "prep_time_min": 12,
+        "price": 50.0
+      },
+      {
+        "name": "Pizza Margarita",
+        "qty": 11,
+        "prep_time_min": 12,
+        "price": 50.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-26T00:07:51.729315",
+    "estacion_id": null,
+    "cliente_info": {
+      "nombre": "Milton",
+      "telefono": "98765432"
+    },
+    "total_price": 600.0
+  },
+  {
+    "id": "PED-0001",
+    "items": [
+      {
+        "name": "Pizza de Pepperoni",
+        "qty": 2,
+        "prep_time_min": 12,
+        "price": 65.0
+      }
+    ],
+    "estado": "PENDIENTE",
+    "tiempo_estimado_min": null,
+    "timestamp_creado": "2025-11-26T00:09:30.092312",
+    "estacion_id": null,
+    "cliente_info": {
+      "nombre": "Milton",
+      "telefono": "98765432"
+    },
+    "total_price": 130.0
   }
 ]
